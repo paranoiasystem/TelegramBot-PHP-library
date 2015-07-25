@@ -13,8 +13,16 @@ namespace Telegram;
 
 class TelegramBot
 {
-    function __construct($t){
-        define('TOKEN', $t);
+    function __construct($token, $username){
+        define('TOKEN', $token);
+        define('USERNAME', $username);
+        
+    }
+
+    function getMe()
+    {
+        $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/getMe");
+        return $jsonResponse;
     }
 
     function sendMessage($chat_id, $text, $disable_web_page_preview = false, $reply_to_message_id = false, $reply_markup = false){
@@ -119,9 +127,34 @@ class TelegramBot
         return $jsonResponse;
     }
 
-    function test()
+    function getUpdates($offset = false, $limit = false, $timeout = false)
     {
-        return true;
+        $arrayPost = array();
+        if ($offset)
+            array_push_assoc($arrayPost, 'offset', $offset);
+        if ($limit)
+            array_push_assoc($arrayPost, 'limit', $limit);
+        if ($timeout)
+            array_push_assoc($arrayPost, 'timeout', $timeout);
+        $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/getUpdates", $arrayPost);
+        return $jsonResponse;
+    }
+
+    function setWebhook($url = false){
+        $arrayPost = array();
+        if ($url)
+            array_push_assoc($arrayPost, 'url', $url);
+        $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/setWebhook", $arrayPost);
+        return $jsonResponse;
+    }
+
+    function test($json)
+    {
+        $json = json_decode($json, true);
+        if(USERNAME == $json['result']['username'])
+            return true;
+        else
+            return false;
     }
 
     function array_push_assoc(&$array, $key, $value){

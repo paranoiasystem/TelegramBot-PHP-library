@@ -1,25 +1,20 @@
 {
-    "name": "paranoiasystem/telegrambot-library",
-    "description": "TelegramBot PHP unofficial library.",
+    "name": "paranoia/telegram-bot-php-library",
+    "description": "TelegramBot PHP unofficial library",
     "type": "library",
-    "keywords": [
-        "php",
-        "telegram",
-        "bot",
-        "api"
-    ],
-    "homepage": "https://github.com/paranoiasystem/TelegramBot-PHP-library",
     "license": "GPL-2.0",
     "authors": [
         {
-            "name": "Marco Ferraioli A.K.A. ParanoiaSystem",
-            "email": "marcoferraioli@live.com",
-            "homepage": "https://marcoferraioli.com",
-            "role": "Developer"
+            "name": "ParanoiaSystem",
+            "email": "m.ferraioli25@studenti.unisa.it"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.0.*"
     },
     "autoload": {
         "psr-4": {

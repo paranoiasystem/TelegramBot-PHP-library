@@ -9,7 +9,7 @@
         "api"
     ],
     "homepage": "https://github.com/paranoiasystem/TelegramBot-PHP-library",
-    "license": "GNU GPL 2",
+    "license": "GPL-2.0",
     "authors": [
         {
             "name": "Marco Ferraioli A.K.A. ParanoiaSystem",

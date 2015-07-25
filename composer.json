@@ -2,6 +2,7 @@
     "name": "paranoiasystem/telegrambot-php-library",
     "description": "TelegramBot PHP unofficial library.",
     "type": "library",
+    "version": "1.0.0",
     "keywords": [
         "php",
         "telegram",
@@ -29,5 +30,4 @@
             "Telegram\\": "src"
         }
     }
-
 }

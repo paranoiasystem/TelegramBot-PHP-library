@@ -2,8 +2,15 @@
     "name": "paranoiasystem/telegrambot-php-library",
     "description": "TelegramBot PHP unofficial library.",
     "type": "library",
+    "version": "dev-master",
+    "source": {
+        "url": "git://github.com/paranoiasystem/TelegramBot-PHP-library.git",
+        "type": "git",
+        "reference": "master"
+        },
     "require": {
-        "php": ">=5.4.0"
+        "php": ">=5.4.0",
+        "paranoiasystem/telegrambot-php-library": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "4.0.*"

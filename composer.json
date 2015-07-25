@@ -1,5 +1,5 @@
 {
-    "name": "paranoiasystem/TelegramBot-PHP-library",
+    "name": "paranoiasystem/telegram-bot-php-library",
     "description": "TelegramBot PHP unofficial library",
     "require": {
         "php": ">=5.6.0"

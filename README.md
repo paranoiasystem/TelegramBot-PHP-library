@@ -18,6 +18,8 @@ $ composer require paranoiasystem/telegrambot-php-library
 
 ## Usage
 
+Send Message
+
 ``` php
 <?php
 	require_once __DIR__ . '/vendor/autoload.php'; 
@@ -27,4 +29,21 @@ $ composer require paranoiasystem/telegrambot-php-library
 	$bot = new TelegramBot('YOUR_BOT_API_TOKEN', 'YOUR_BOT_USERNAME');
 
 	$bot->sendMessage('chat_id', 'text');
+```
+	
+Send Photo
+
+``` php
+<?php
+	require_once __DIR__ . '/vendor/autoload.php'; 
+
+	use Telegram\TelegramBot;
+
+	$bot = new TelegramBot('YOUR_BOT_API_TOKEN', 'YOUR_BOT_USERNAME');
+
+	$bot->sendPhoto('chat_id', 'path_to_photo');
+
+	//or
+
+	$bot->sendPhoto('chat_id', array('file_id'  => 'file_id_value'));
 ```

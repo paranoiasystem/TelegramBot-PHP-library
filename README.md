@@ -5,7 +5,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/paranoiasystem/telegrambot-php-library.svg?style=flat-square)](https://packagist.org/packages/paranoiasystem/telegrambot-php-library)
 [![GitHub license](https://img.shields.io/badge/license-GPLv2-blue.svg?style=flat-square)](LICENSE)
 
-TelegramBot is an unofficial library wirte in PHP for use the [Telegram APIs for bot](https://core.telegram.org/bots/api)
+TelegramBot is an unofficial library in PHP for use the [Telegram APIs for bot](https://core.telegram.org/bots/api)
 
 
 ## Install
@@ -30,7 +30,7 @@ Send Message
 
 	$bot->sendMessage('chat_id', 'text');
 ```
-	
+
 Send Photo
 
 ``` php

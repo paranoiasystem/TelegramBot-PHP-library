@@ -5,7 +5,7 @@
  *
  * TelegramBot is an unofficial library for use the Telegram APIs for bot.
  *
- * @version 1.0
+ * @version 1.0.1
  * @author ParanoiaSystem
  */
 

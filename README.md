@@ -22,9 +22,9 @@ Send Message
 
 ``` php
 <?php
-	require_once __DIR__ . '/vendor/autoload.php'; 
+	namespace Telegram;
 
-	use Telegram\TelegramBot;
+    require_once __DIR__ . '/vendor/autoload.php'; 
 
 	$bot = new TelegramBot('YOUR_BOT_API_TOKEN', 'YOUR_BOT_USERNAME');
 
@@ -35,9 +35,9 @@ Send Photo
 
 ``` php
 <?php
-	require_once __DIR__ . '/vendor/autoload.php'; 
+	namespace Telegram;
 
-	use Telegram\TelegramBot;
+    require_once __DIR__ . '/vendor/autoload.php'; 
 
 	$bot = new TelegramBot('YOUR_BOT_API_TOKEN', 'YOUR_BOT_USERNAME');
 
@@ -46,4 +46,49 @@ Send Photo
 	//or
 
 	$bot->sendPhoto('chat_id', array('file_id'  => 'file_id_value'));
+```
+
+## Bot Example
+
+Set WebHook
+
+``` php
+<?php
+	namespace Telegram;
+
+    require_once __DIR__ . '/vendor/autoload.php'; 
+
+    $bot = new TelegramBot('YOUR_BOT_API_TOKEN', 'YOUR_BOT_USERNAME');
+
+    $response = $bot->setWebhook("https://url.to/hook.php"); //only https
+
+	if($response->description == "Webhook was set")
+		echo "Ok! The bot is ready!";
+	else{
+		echo "Ops! Error <br>";
+		print_r($response);
+	}
+?>
+```
+
+BotCore (hook.php)
+
+``` php
+<?php
+	namespace Telegram;
+
+    require_once __DIR__ . '/vendor/autoload.php'; 
+
+    $bot = new TelegramBot('YOUR_BOT_API_TOKEN', 'YOUR_BOT_USERNAME');
+
+    $response = $bot->hook();
+
+	$comand = $response->message->text;
+
+	if(substr($comand, 0, strlen("/echo")) === "/echo")
+		$bot->sendMessage($response->message->chat->id, str_replace("/echo", "", $comand));
+
+	if(substr($comand, 0, strlen("/img")) === "/img")
+		$bot->sendPhoto($response->message->chat->id, 'path_to_photo');
+?>
 ```

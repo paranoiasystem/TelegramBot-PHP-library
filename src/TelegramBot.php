@@ -14,19 +14,19 @@ namespace Telegram;
 class TelegramBot
 {
 
-    function __construct($token, $username){
+    public function __construct($token, $username){
         define('TOKEN', $token);
         define('USERNAME', $username);
         
     }
 
-    function getMe()
+    public function getMe()
     {
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/getMe");
         return $jsonResponse;
     }
 
-    function sendMessage($chat_id, $text, $disable_web_page_preview = false, $reply_to_message_id = false, $reply_markup = false){
+    public function sendMessage($chat_id, $text, $disable_web_page_preview = false, $reply_to_message_id = false, $reply_markup = false){
     	$arrayPost = array('chat_id' => $chat_id, 'text' => $text);
         if($reply_to_message_id)
             $this->array_push_assoc($arrayPost, 'reply_to_message_id', $reply_to_message_id);
@@ -35,16 +35,16 @@ class TelegramBot
         if($reply_markup)
             $this->array_push_assoc($arrayPost, 'reply_markup', $reply_markup);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/sendMessage", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
 
-    function forwardMessage($chat_id, $from_chat_id, $message_id){
+    public function forwardMessage($chat_id, $from_chat_id, $message_id){
     	$arrayPost = array('chat_id' => $chat_id, 'from_chat_id' => $from_chat_id, 'message_id' => $message_id);
     	$jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/forwardMessage", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
     
-    function sendPhoto($chat_id, $photo, $caption = false, $reply_to_message_id = false, $reply_markup = false){
+    public function sendPhoto($chat_id, $photo, $caption = false, $reply_to_message_id = false, $reply_markup = false){
         $arrayPost = array('chat_id' => $chat_id, 'photo' => $photo);
     	if($caption)
             $this->array_push_assoc($arrayPost, 'caption', $caption);
@@ -53,10 +53,10 @@ class TelegramBot
         if($reply_markup)
             $this->array_push_assoc($arrayPost, 'reply_markup', $reply_markup);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/sendPhoto", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
 
-    function sendAudio($chat_id, $audio, $duration = 0, $reply_to_message_id = false, $reply_markup = false){
+    public function sendAudio($chat_id, $audio, $duration = 0, $reply_to_message_id = false, $reply_markup = false){
     	$arrayPost = array('chat_id' => $chat_id, 'audio' => $audio);
     	if($duration > 0)
             $this->array_push_assoc($arrayPost, 'duration', $duration);
@@ -65,30 +65,30 @@ class TelegramBot
         if($reply_markup)
             $this->array_push_assoc($arrayPost, 'reply_markup', $reply_markup);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/sendAudio", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
 
-    function sendDocument($chat_id, $document, $reply_to_message_id = false, $reply_markup = false){
+    public function sendDocument($chat_id, $document, $reply_to_message_id = false, $reply_markup = false){
     	$arrayPost = array('chat_id' => $chat_id, 'document' => $document);
     	if($reply_to_message_id)
             $this->array_push_assoc($arrayPost, 'reply_to_message_id', $reply_to_message_id);
         if($reply_markup)
             $this->array_push_assoc($arrayPost, 'reply_markup', $reply_markup);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/sendDocument", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
     
-    function sendSticker($chat_id, $sticker, $reply_to_message_id = false, $reply_markup = false){
+    public function sendSticker($chat_id, $sticker, $reply_to_message_id = false, $reply_markup = false){
     	$arrayPost = array('chat_id' => $chat_id, 'sticker' => $sticker);
     	if($reply_to_message_id)
             $this->array_push_assoc($arrayPost, 'reply_to_message_id', $reply_to_message_id);
         if($reply_markup)
             $this->array_push_assoc($arrayPost, 'reply_markup', $reply_markup);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/sendSticker", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
     
-    function sendVideo($chat_id, $video, $duration = 0, $caption = false, $reply_to_message_id = false, $reply_markup = false){
+    public function sendVideo($chat_id, $video, $duration = 0, $caption = false, $reply_to_message_id = false, $reply_markup = false){
     	$arrayPost = array('chat_id' => $chat_id, 'video' => $video);
     	if($duration > 0)
             $this->array_push_assoc($arrayPost, 'duration', $duration);
@@ -99,36 +99,36 @@ class TelegramBot
         if($reply_markup)
             $this->array_push_assoc($arrayPost, 'reply_markup', $reply_markup);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/sendVideo", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
 
-    function sendLocation($chat_id, $latitude, $longitude, $reply_to_message_id = false, $reply_markup = false){
+    public function sendLocation($chat_id, $latitude, $longitude, $reply_to_message_id = false, $reply_markup = false){
     	$arrayPost = array('chat_id' => $chat_id, 'latitude' => $latitude, 'longitude' => $longitude);
     	if($reply_to_message_id)
             $this->array_push_assoc($arrayPost, 'reply_to_message_id', $reply_to_message_id);
         if($reply_markup)
             $this->array_push_assoc($arrayPost, 'reply_markup', $reply_markup);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/sendLocation", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
 
-    function sendChatAction($chat_id, $action){
+    public function sendChatAction($chat_id, $action){
     	$arrayPost = array('chat_id' => $chat_id, 'action' => $action);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/sendChatAction", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
     
-    function getUserProfilePhotos($user_id, $offset = false, $limit = false){
+    public function getUserProfilePhotos($user_id, $offset = false, $limit = false){
     	$arrayPost = array('user_id' => $user_id);
     	if($offset)
     		$this->array_push_assoc($arrayPost, 'offset', $offset);
     	if($limit)
     		$this->array_push_assoc($arrayPost, 'limit', $limit);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/getUserProfilePhotos", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
 
-    function getUpdates($offset = false, $limit = false, $timeout = false)
+    public function getUpdates($offset = false, $limit = false, $timeout = false)
     {
         $arrayPost = array();
         if ($offset)
@@ -138,18 +138,24 @@ class TelegramBot
         if ($timeout)
             $this->array_push_assoc($arrayPost, 'timeout', $timeout);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/getUpdates", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
 
-    function setWebhook($url = false){
+    public function setWebhook($url = false){
         $arrayPost = array();
         if ($url)
             $this->array_push_assoc($arrayPost, 'url', $url);
         $jsonResponse = $this->curl_call("https://api.telegram.org/bot" . TOKEN . "/setWebhook", $arrayPost);
-        return $jsonResponse;
+        return json_decode($jsonResponse);
     }
 
-    function test($json)
+    public function hook()
+    {
+        $json = file_get_contents('php://input');
+        return json_decode($json);
+    }
+
+    public function test($json)
     {
         $json = json_decode($json, true);
         if(USERNAME == $json['result']['username'])
